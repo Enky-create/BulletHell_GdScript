@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bupsqaky4485u"]
+
+[ext_resource type="PackedScene" uid="uid://bkmmlownrcchh" path="res://scenes/player/player.tscn" id="1_84swx"]
+[ext_resource type="PackedScene" uid="uid://bcbtq1aw360et" path="res://scenes/projectiles/Vortex/vortex.tscn" id="2_0lip3"]
+
+[node name="Level" type="Node2D"]
+
+[node name="Projectile" parent="." instance=ExtResource("2_0lip3")]
+position = Vector2(726, 362)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_84swx")]
+position = Vector2(479, 371)
+health = 0.0
