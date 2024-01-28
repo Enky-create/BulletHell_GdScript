@@ -1,5 +1,6 @@
-[gd_scene load_steps=67 format=3 uid="uid://bcbtq1aw360et"]
+[gd_scene load_steps=68 format=3 uid="uid://bcbtq1aw360et"]
 
+[ext_resource type="Script" path="res://scenes/projectiles/Vortex/projectile.gd" id="1_5btjg"]
 [ext_resource type="Script" path="res://scenes/projectiles/Vortex/Hitbox.gd" id="2_50bnl"]
 [ext_resource type="Texture2D" uid="uid://cocku658bj1ah" path="res://sprites/Free Pixel Effects Pack/13_vortex_spritesheet.png" id="2_lsdmo"]
 
@@ -443,6 +444,8 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_ip2pr"]
 
 [node name="Projectile" type="Node2D"]
+script = ExtResource("1_5btjg")
+lifetime = 0.5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_62gjo")
@@ -453,11 +456,19 @@ collision_layer = 2
 collision_mask = 0
 monitoring = false
 script = ExtResource("2_50bnl")
+damage = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_hoim7")
 
 [node name="ImpactDetector" type="Area2D" parent="."]
+collision_mask = 0
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ImpactDetector"]
 shape = SubResource("CircleShape2D_ip2pr")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.292
+one_shot = true
+autostart = true

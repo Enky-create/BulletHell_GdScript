@@ -1,12 +1,12 @@
+class_name HitBox
 extends Area2D
 @export
 var damage:float
-# Called when the node enters the scene tree for the first time.
-func _ready():
+@onready var collision_shape = $CollisionShape2D
+func _init():
 	monitoring=false
-	collision_mask=1
-	collision_layer = 0
+	collision_mask=0
+	collision_layer = 2
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
+func set_disabled(is_disabled:bool):
+	collision_shape.set_deffered("disabled",is_disabled)

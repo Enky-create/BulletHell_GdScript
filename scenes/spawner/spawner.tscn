@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://doomj14cxs1jx"]
+
+[ext_resource type="Script" path="res://scenes/spawner/spawner.gd" id="1_q5ky0"]
+[ext_resource type="PackedScene" uid="uid://bcbtq1aw360et" path="res://scenes/projectiles/Vortex/vortex.tscn" id="2_o4kiu"]
+
+[node name="Spawner" type="Node2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_q5ky0")
+object = ExtResource("2_o4kiu")
+
+[node name="Positions" type="Node2D" parent="."]
+
+[node name="Position1" type="Node2D" parent="Positions"]
+position = Vector2(10, 0)
+
+[node name="Position2" type="Node2D" parent="Positions"]
+position = Vector2(0, 10)
+
+[node name="Position3" type="Node2D" parent="Positions"]
+position = Vector2(-10, 0)
+
+[node name="Position4" type="Node2D" parent="Positions"]
+position = Vector2(0, -10)
