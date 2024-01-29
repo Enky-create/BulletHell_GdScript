@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmq321nje6qdd"]
+
+[ext_resource type="PackedScene" uid="uid://doomj14cxs1jx" path="res://scenes/spawner/spawner.tscn" id="1_y5q6i"]
+[ext_resource type="Script" path="res://scenes/spawner/projectile_spawner.gd" id="2_4nxcu"]
+
+[node name="Spawner" instance=ExtResource("1_y5q6i")]
+script = ExtResource("2_4nxcu")
+target_layer = 1
+object = null

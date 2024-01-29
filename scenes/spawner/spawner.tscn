@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://bcbtq1aw360et" path="res://scenes/projectiles/Vortex/vortex.tscn" id="2_o4kiu"]
 
 [node name="Spawner" type="Node2D"]
-scale = Vector2(2, 2)
 script = ExtResource("1_q5ky0")
 object = ExtResource("2_o4kiu")
 

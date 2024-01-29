@@ -6,7 +6,7 @@ var damage:float
 func _init():
 	monitoring=false
 	collision_mask=0
-	collision_layer = 2
+	#collision_layer = 2
 
 func set_disabled(is_disabled:bool):
 	collision_shape.set_deffered("disabled",is_disabled)

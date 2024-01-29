@@ -1,6 +1,6 @@
 class_name Projectile
 extends Node2D
-
+var layer:int=0
 @export var speed:float = 500.0
 @export var lifetime:float = 2.0
 
@@ -17,6 +17,7 @@ func _ready():
 	timer.timeout.connect(queue_free)
 	timer.start(lifetime)
 	impact_detector.body_entered.connect(_on_impact)
+	hitbox.collision_layer=layer
 	
 func _physics_process(delta):
 	position+=direction*speed*delta

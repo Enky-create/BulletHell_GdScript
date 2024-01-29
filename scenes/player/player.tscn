@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bkmmlownrcchh"]
+[gd_scene load_steps=8 format=3 uid="uid://bkmmlownrcchh"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_7pjgg"]
 [ext_resource type="Texture2D" uid="uid://dkbl8n3sg0cq1" path="res://icon.svg" id="2_oia0o"]
 [ext_resource type="Script" path="res://scenes/player/Hurtbox.gd" id="3_tkn6i"]
-[ext_resource type="PackedScene" uid="uid://doomj14cxs1jx" path="res://scenes/spawner/spawner.tscn" id="4_je6ms"]
+[ext_resource type="PackedScene" uid="uid://dmq321nje6qdd" path="res://scenes/spawner/projectile_spawner.tscn" id="4_qym17"]
+[ext_resource type="PackedScene" uid="uid://bcbtq1aw360et" path="res://scenes/projectiles/Vortex/vortex.tscn" id="5_ogfh4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fx020"]
 size = Vector2(130, 128)
@@ -34,7 +35,8 @@ script = ExtResource("3_tkn6i")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("RectangleShape2D_brdl0")
 
-[node name="Spawner" parent="." instance=ExtResource("4_je6ms")]
-
 [node name="ShootTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Spawner" parent="." instance=ExtResource("4_qym17")]
+object = ExtResource("5_ogfh4")

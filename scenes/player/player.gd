@@ -11,6 +11,7 @@ var can_shoot:bool=true
 func _ready():
 	shoot_timer.wait_time=shoot_delay
 	shoot_timer.timeout.connect(_on_shoot_timer_out)
+	
 func _physics_process(delta):
 	_move_position(delta)
 	if(Input.is_action_pressed("main_action")):
