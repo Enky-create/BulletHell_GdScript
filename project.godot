@@ -15,9 +15,17 @@ run/main_scene="res://scenes/player/player.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Spawning="*res://addons/BulletUpHell/Spawning.tscn"
+
 [dotnet]
 
 project/assembly_name="Bullet Hell Gd Script"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/BulletUpHell/plugin.cfg")
 
 [filesystem]
 
