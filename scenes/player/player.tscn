@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_7pjgg"]
 [ext_resource type="Texture2D" uid="uid://dkbl8n3sg0cq1" path="res://icon.svg" id="2_oia0o"]
 [ext_resource type="Script" path="res://scenes/player/Hurtbox.gd" id="3_tkn6i"]
-[ext_resource type="PackedScene" path="res://scenes/spawner/projectile_spawner.tscn" id="4_qym17"]
+[ext_resource type="PackedScene" uid="uid://dmq321nje6qdd" path="res://scenes/spawner/projectile_spawner.tscn" id="4_qym17"]
 [ext_resource type="PackedScene" uid="uid://bcbtq1aw360et" path="res://scenes/projectiles/Vortex/vortex.tscn" id="5_ogfh4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fx020"]
