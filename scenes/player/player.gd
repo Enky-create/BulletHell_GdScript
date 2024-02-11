@@ -26,7 +26,7 @@ func _move_position(delta:float):
 	move_and_slide()
 
 func take_damage(damage:float):
-	print(damage)
+	print("AAAAAAAAAAA")
 func shoot():
 	if(can_shoot):
 		spawner.spawn_object()

@@ -443,9 +443,11 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ip2pr"]
 
-[node name="Projectile" type="Node2D"]
+[node name="vortex" type="Node2D"]
+position = Vector2(343, 326)
 script = ExtResource("1_5btjg")
 lifetime = 0.5
+metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_62gjo")
@@ -467,6 +469,7 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ImpactDetector"]
 shape = SubResource("CircleShape2D_ip2pr")
+metadata/_edit_group_ = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.292

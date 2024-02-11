@@ -1,10 +1,10 @@
 class_name Projectile
 extends Node2D
-var layer:int=0
+var layer:int=2
 @export var speed:float = 500.0
 @export var lifetime:float = 2.0
 
-var direction:Vector2 = Vector2.ZERO
+var direction:Vector2 = Vector2.RIGHT
 
 @onready var timer = $Timer
 @onready var impact_detector = $ImpactDetector
@@ -24,3 +24,4 @@ func _physics_process(delta):
 
 func _on_impact(_body:Node2D):
 	queue_free()
+	pass

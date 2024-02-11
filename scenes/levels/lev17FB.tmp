@@ -87,6 +87,7 @@ r_trigger_choice = ""
 script = ExtResource("8_rk5sa")
 
 [node name="vortex" parent="InstanceLister" instance=ExtResource("9_lj4l8")]
+speed = 500.0
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_84swx")]
 position = Vector2(479, 371)
