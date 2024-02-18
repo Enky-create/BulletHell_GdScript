@@ -1,11 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://bupsqaky4485u"]
+[gd_scene load_steps=16 format=3 uid="uid://bupsqaky4485u"]
 
 [ext_resource type="PackedScene" uid="uid://bkmmlownrcchh" path="res://scenes/player/player.tscn" id="1_84swx"]
+[ext_resource type="Script" path="res://addons/BulletUpHell/BuHBulletNode.gd" id="2_eib06"]
 [ext_resource type="Script" path="res://addons/BulletUpHell/BuHPattern.gd" id="2_srhfm"]
 [ext_resource type="Script" path="res://addons/BulletUpHell/SpawnPatterns/PatternLine.gd" id="3_mp0x0"]
 [ext_resource type="Script" path="res://addons/BulletUpHell/BuHBulletProperties.gd" id="4_c1i4l"]
-[ext_resource type="Script" path="res://addons/BulletUpHell/ObjectProps.gd" id="5_os4gx"]
 [ext_resource type="Script" path="res://addons/BulletUpHell/BuHSpawnPoint.gd" id="6_2bnky"]
+[ext_resource type="Script" path="res://addons/BulletUpHell/BulletNodeProps.gd" id="8_ftnwj"]
 [ext_resource type="Script" path="res://addons/BulletUpHell/BuHInstanceLister.gd" id="8_rk5sa"]
 [ext_resource type="PackedScene" uid="uid://bcbtq1aw360et" path="res://scenes/projectiles/Vortex/vortex.tscn" id="9_lj4l8"]
 
@@ -70,23 +71,96 @@ r_cooldown_n_shoot_variation = Vector3(0, 0, 0)
 
 [sub_resource type="Curve2D" id="Curve2D_iidyk"]
 
-[sub_resource type="PackedDataContainer" id="PackedDataContainer_7qwdd"]
-script = ExtResource("5_os4gx")
-instance_id = "vortex"
-fixed_rotation = true
-angle = 0.0
-groups = PackedStringArray()
+[sub_resource type="Curve" id="Curve_e5i4c"]
+
+[sub_resource type="Curve" id="Curve_8rx0i"]
+
+[sub_resource type="PackedDataContainer" id="PackedDataContainer_46ns5"]
+script = ExtResource("8_ftnwj")
+instance_id = "bulletnode"
+speed = 100.0
+scale = 1
+angle = 0
+groups = []
 overwrite_groups = false
+anim_idle_sfx = -1
+anim_spawn_sfx = -1
+anim_waiting_sfx = -1
+anim_delete_sfx = -1
+spec_bounces = 0
+spec_no_collision = false
+spec_modulate_loop = 0.0
+spec_trail_length = 0.0
+spec_trail_width = 0.0
+spec_trail_modulate = Color(1, 1, 1, 1)
+spec_rotating_speed = 0.0
+death_after_time = 30.0
+death_outside_box = Rect2(0, 0, 0, 0)
+death_from_collision = true
+a_direction_equation = ""
+a_curve_movement = 0
+a_speed_multiplier = SubResource("Curve_e5i4c")
+a_speed_multi_iterations = 0
+a_speed_multi_scale = 0.0
 trigger_container = ""
 trigger_wait_for_shot = true
+homing_type = 0
+homing_target = NodePath("")
+homing_steer = 0
+homing_time_start = 0
+homing_duration = 999
+scale_multi_iterations = 0
+scale_multiplier = SubResource("Curve_8rx0i")
+scale_multi_scale = 1
+r_randomisation_chances = 1.0
+r_speed_choice = ""
+r_speed_variation = Vector3(0, 0, 0)
+r_scale_choice = ""
+r_scale_variation = Vector3(0, 0, 0)
+r_angle_choice = ""
+r_angle_variation = Vector3(0, 0, 0)
+r_group_choice = []
+r_bounce_choice = ""
+r_bounce_variation = Vector3(0, 0, 0)
+r_no_coll_chances = 0.0
+r_modulate_variation = Vector3(0, 0, 0)
+r_trail_length_variation = Vector3(0, 0, 0)
+r_trail_color_variation = Vector3(0, 0, 0)
+r_rotating_variation = Vector3(0, 0, 0)
+r_death_after_choice = ""
+r_death_after_variation = Vector3(0, 0, 0)
+r_death_outside_chances = 0.0
+r_dir_equation_choice = ""
+r_curve_choice = []
+r_speed_multi_curve_choice = []
+r_speed_multi_iter_variation = Vector3(0, 0, 0)
+r_speed_multi_scale_variation = Vector3(0, 0, 0)
 r_trigger_choice = ""
+r_wait_for_shot_chances = 0.0
+r_homing_target_choice = []
+r_special_target_choice = ""
+r_group_target_choice = ""
+r_pos_target_choice = ""
+r_steer_choice = ""
+r_steer_variation = Vector3(0, 0, 0)
+r_homing_delay_choice = ""
+r_homing_delay_variation = Vector3(0, 0, 0)
+r_homing_dur_choice = ""
+r_homing_dur_variation = Vector3(0, 0, 0)
+r_scale_multi_curve_choice = []
+r_scale_multi_iter_variation = Vector3(0, 0, 0)
+r_scale_multi_scale_variation = Vector3(0, 0, 0)
 
 [node name="Level" type="Node2D"]
 
 [node name="InstanceLister" type="Node" parent="."]
 script = ExtResource("8_rk5sa")
 
-[node name="vortex" parent="InstanceLister" instance=ExtResource("9_lj4l8")]
+[node name="BulletNode" type="Area2D" parent="InstanceLister"]
+script = ExtResource("2_eib06")
+ID = "bulletnode"
+
+[node name="vortex" parent="InstanceLister/BulletNode" instance=ExtResource("9_lj4l8")]
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_84swx")]
 position = Vector2(479, 371)
@@ -107,7 +181,7 @@ pattern = SubResource("NavigationPolygon_km6xe")
 curve = SubResource("Curve2D_iidyk")
 script = ExtResource("4_c1i4l")
 id = "Bullet"
-props = SubResource("PackedDataContainer_7qwdd")
+props = SubResource("PackedDataContainer_46ns5")
 
 [node name="SpawnPoints" type="Node2D" parent="."]
 rotation = -0.598648
