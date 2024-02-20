@@ -1,35 +1,32 @@
-[gd_scene load_steps=16 format=3 uid="uid://bupsqaky4485u"]
+[gd_scene load_steps=13 format=3 uid="uid://bupsqaky4485u"]
 
 [ext_resource type="PackedScene" uid="uid://bkmmlownrcchh" path="res://scenes/player/player.tscn" id="1_84swx"]
-[ext_resource type="Script" path="res://addons/BulletUpHell/BuHBulletNode.gd" id="2_eib06"]
 [ext_resource type="Script" path="res://addons/BulletUpHell/BuHPattern.gd" id="2_srhfm"]
 [ext_resource type="Script" path="res://addons/BulletUpHell/SpawnPatterns/PatternLine.gd" id="3_mp0x0"]
 [ext_resource type="Script" path="res://addons/BulletUpHell/BuHBulletProperties.gd" id="4_c1i4l"]
 [ext_resource type="Script" path="res://addons/BulletUpHell/BuHSpawnPoint.gd" id="6_2bnky"]
-[ext_resource type="Script" path="res://addons/BulletUpHell/BulletNodeProps.gd" id="8_ftnwj"]
-[ext_resource type="Script" path="res://addons/BulletUpHell/BuHInstanceLister.gd" id="8_rk5sa"]
-[ext_resource type="PackedScene" uid="uid://bcbtq1aw360et" path="res://scenes/projectiles/Vortex/vortex.tscn" id="9_lj4l8"]
+[ext_resource type="Script" path="res://addons/BulletUpHell/BulletProps.gd" id="6_jaogi"]
 
-[sub_resource type="Curve2D" id="Curve2D_6j4pu"]
+[sub_resource type="Curve2D" id="Curve2D_7f441"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_km6xe"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_y4etp"]
 resource_name = "PatternLine"
 source_geometry_group_name = &"navigation_polygon_source_group"
 script = ExtResource("3_mp0x0")
-offset = Vector2(0, 20)
+offset = Vector2(10, 20)
 center = 3
 symmetrical = null
-bullet = "Bullet"
+bullet = "1"
 nbr = 5
-pattern_angle = -0.7466
+pattern_angle = 0.0004
 iterations = -1
 follows_parent = false
-forced_angle = 0.0
+forced_angle = 0.0004
 forced_target = NodePath("")
 forced_lookat_mouse = false
 forced_pattern_lookat = true
 cooldown_stasis = false
-cooldown_spawn = 0.5
+cooldown_spawn = 0.2
 cooldown_shoot = 0.0
 cooldown_next_spawn = 0.0
 cooldown_next_shoot = 0.0
@@ -69,20 +66,27 @@ r_cooldown_n_spawn_variation = Vector3(0, 0, 0)
 r_cooldown_n_shoot_choice = ""
 r_cooldown_n_shoot_variation = Vector3(0, 0, 0)
 
-[sub_resource type="Curve2D" id="Curve2D_iidyk"]
+[sub_resource type="Curve2D" id="Curve2D_gdfby"]
 
-[sub_resource type="Curve" id="Curve_e5i4c"]
+[sub_resource type="Curve" id="Curve_0rug2"]
 
-[sub_resource type="Curve" id="Curve_8rx0i"]
+[sub_resource type="Curve" id="Curve_k5xtw"]
 
-[sub_resource type="PackedDataContainer" id="PackedDataContainer_46ns5"]
-script = ExtResource("8_ftnwj")
-instance_id = "bulletnode"
+[sub_resource type="PackedDataContainer" id="PackedDataContainer_g1agc"]
+script = ExtResource("6_jaogi")
+damage = 1.0
 speed = 100.0
 scale = 1
 angle = 0
 groups = []
-overwrite_groups = false
+anim_idle_texture = "0"
+anim_spawn_texture = ""
+anim_waiting_texture = ""
+anim_delete_texture = ""
+anim_idle_collision = "0"
+anim_spawn_collision = ""
+anim_waiting_collision = ""
+anim_delete_collision = ""
 anim_idle_sfx = -1
 anim_spawn_sfx = -1
 anim_waiting_sfx = -1
@@ -90,16 +94,19 @@ anim_delete_sfx = -1
 spec_bounces = 0
 spec_no_collision = false
 spec_modulate_loop = 0.0
+spec_skew = 0.0
 spec_trail_length = 0.0
 spec_trail_width = 0.0
 spec_trail_modulate = Color(1, 1, 1, 1)
 spec_rotating_speed = 0.0
+spec_angle_no_colliding = null
+spec_angle_no_coll_offset = null
 death_after_time = 30.0
 death_outside_box = Rect2(0, 0, 0, 0)
 death_from_collision = true
 a_direction_equation = ""
 a_curve_movement = 0
-a_speed_multiplier = SubResource("Curve_e5i4c")
+a_speed_multiplier = SubResource("Curve_0rug2")
 a_speed_multi_iterations = 0
 a_speed_multi_scale = 0.0
 trigger_container = ""
@@ -110,7 +117,7 @@ homing_steer = 0
 homing_time_start = 0
 homing_duration = 999
 scale_multi_iterations = 0
-scale_multiplier = SubResource("Curve_8rx0i")
+scale_multiplier = SubResource("Curve_k5xtw")
 scale_multi_scale = 1
 r_randomisation_chances = 1.0
 r_speed_choice = ""
@@ -147,53 +154,41 @@ r_homing_delay_choice = ""
 r_homing_delay_variation = Vector3(0, 0, 0)
 r_homing_dur_choice = ""
 r_homing_dur_variation = Vector3(0, 0, 0)
+r_beam_length_choice = ""
+r_beam_length_variation = Vector3(0, 0, 0)
+r_beam_bounce_choice = ""
+r_beam_width_variation = Vector3(0, 0, 0)
 r_scale_multi_curve_choice = []
 r_scale_multi_iter_variation = Vector3(0, 0, 0)
 r_scale_multi_scale_variation = Vector3(0, 0, 0)
 
 [node name="Level" type="Node2D"]
 
-[node name="InstanceLister" type="Node" parent="."]
-script = ExtResource("8_rk5sa")
-
-[node name="BulletNode" type="Area2D" parent="InstanceLister"]
-script = ExtResource("2_eib06")
-ID = "bulletnode"
-
-[node name="vortex" parent="InstanceLister/BulletNode" instance=ExtResource("9_lj4l8")]
-
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_84swx")]
 position = Vector2(479, 371)
 scale = Vector2(0.1, 0.1)
 health = 0.0
 
-[node name="SpawnPatterns" type="Node2D" parent="."]
-
-[node name="SpawnPattern" type="Path2D" parent="SpawnPatterns"]
-curve = SubResource("Curve2D_6j4pu")
+[node name="SpawnPattern" type="Path2D" parent="."]
+curve = SubResource("Curve2D_7f441")
 script = ExtResource("2_srhfm")
-id = "VerticalLine"
-pattern = SubResource("NavigationPolygon_km6xe")
+id = "1"
+pattern = SubResource("NavigationPolygon_y4etp")
 
-[node name="BulletPattern" type="Node2D" parent="."]
-
-[node name="BulletPattern" type="Path2D" parent="BulletPattern"]
-curve = SubResource("Curve2D_iidyk")
+[node name="BulletPattern" type="Path2D" parent="."]
+curve = SubResource("Curve2D_gdfby")
 script = ExtResource("4_c1i4l")
-id = "Bullet"
-props = SubResource("PackedDataContainer_46ns5")
+id = "1"
+props = SubResource("PackedDataContainer_g1agc")
 
-[node name="SpawnPoints" type="Node2D" parent="."]
-rotation = -0.598648
-
-[node name="SpawnPoint" type="Node2D" parent="SpawnPoints"]
-position = Vector2(44.7926, 377.972)
+[node name="SpawnPoint" type="Node2D" parent="."]
+position = Vector2(344, 385)
 script = ExtResource("6_2bnky")
 active = true
-auto_pattern_id = "VerticalLine"
+auto_pattern_id = "1"
 shared_area_name = "0"
 rotating_speed = 0.0
-pool_amount = 150
+pool_amount = 50
 auto_start_on_cam = true
 auto_start_after_time = 0.0
 auto_start_at_distance = 5.0
