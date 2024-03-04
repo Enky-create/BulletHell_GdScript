@@ -9,6 +9,7 @@ func _on_bullet_collided_body(body:Node, body_shape_index:int, bullet: Dictionar
 	if body == owner and body.has_method("take_damage"):
 		body.take_damage(bullet["props"]["damage"])
 
-func _on_hitbox_entered(body:HitBox):
+func _on_hitbox_entered(body):
 	if owner.has_method("take_damage"):
-		owner.take_damage(body.damage)
+		print(body)
+		owner.take_damage(10)

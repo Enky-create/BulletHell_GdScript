@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqrya3x6s2mkv"]
+
+[ext_resource type="Script" path="res://scenes/Entity_base/Entity.gd" id="1_h2n4h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d3pum"]
+
+[node name="Entity" type="CharacterBody2D"]
+script = ExtResource("1_h2n4h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_d3pum")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

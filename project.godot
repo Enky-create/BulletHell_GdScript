@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Bullet Hell Gd Script"
-run/main_scene="res://scenes/player/player.tscn"
+run/main_scene="res://scenes/player/playerA.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
 
@@ -25,7 +25,7 @@ project/assembly_name="Bullet Hell Gd Script"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/BulletUpHell/plugin.cfg")
+enabled=PackedStringArray("res://addons/BulletUpHell/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg")
 
 [filesystem]
 
