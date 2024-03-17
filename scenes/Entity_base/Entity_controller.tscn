@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://dlnxmivf2ui7l"]
 
-[ext_resource type="Script" path="res://EntityController.gd" id="1_xuktl"]
+[ext_resource type="Script" path="res://scenes/EntityController/EntityController.gd" id="1_kpmtq"]
 [ext_resource type="PackedScene" uid="uid://ct6q3bx2g0183" path="res://scenes/player/player.tscn" id="2_6f3oq"]
 
 [node name="EntityController" type="Node2D"]
-script = ExtResource("1_xuktl")
+script = ExtResource("1_kpmtq")
 
 [node name="Entity" parent="." instance=ExtResource("2_6f3oq")]

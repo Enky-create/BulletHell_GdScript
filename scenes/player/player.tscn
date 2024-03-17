@@ -1,9 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://ct6q3bx2g0183"]
+[gd_scene load_steps=4 format=3 uid="uid://ct6q3bx2g0183"]
 
 [ext_resource type="PackedScene" uid="uid://bqrya3x6s2mkv" path="res://scenes/Entity_base/Entity.tscn" id="1_tupw0"]
 [ext_resource type="Script" path="res://Player.gd" id="2_5qdfl"]
+[ext_resource type="Texture2D" uid="uid://dkbl8n3sg0cq1" path="res://icon.svg" id="3_apk7t"]
 
-[node name="Player" instance=ExtResource("1_tupw0")]
+[node name="Player" groups=["player"] instance=ExtResource("1_tupw0")]
 script = ExtResource("2_5qdfl")
 _speed = 300.0
-_friction = 0.0
+_friction = 0.5
+
+[node name="Sprite2D" parent="." index="2"]
+scale = Vector2(0.234375, 0.21875)
+texture = ExtResource("3_apk7t")

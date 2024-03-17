@@ -1,0 +1,267 @@
+[gd_scene load_steps=17 format=3 uid="uid://mn1em7n75y3i"]
+
+[ext_resource type="PackedScene" uid="uid://bqrya3x6s2mkv" path="res://scenes/Entity_base/Entity.tscn" id="1_11rky"]
+[ext_resource type="Script" path="res://scenes/enemies/death_bringer/death_bringer.gd" id="2_q1p8e"]
+[ext_resource type="Texture2D" uid="uid://b5t3hcyy42bjn" path="res://sprites/Bringer-Of-Death/SpriteSheet/Bringer-of-Death-SpritSheet.png" id="3_oumqd"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="4_yajv6"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="5_xia88"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="6_dg2yf"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="7_ihux6"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="8_1gwfc"]
+
+[sub_resource type="Animation" id="Animation_mc2gv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_d55uk"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [29, 30, 31, 32, 33, 34, 35, 36, 37, 38]
+}
+
+[sub_resource type="Animation" id="Animation_q3q45"]
+resource_name = "hurt"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [25, 26, 27, 28]
+}
+
+[sub_resource type="Animation" id="Animation_r37ii"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_nkv2g"]
+resource_name = "summon"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [39, 41, 42, 43, 44, 45, 46, 47]
+}
+
+[sub_resource type="Animation" id="Animation_6gugh"]
+resource_name = "walk"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11, 12, 13, 14, 15]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iwcoh"]
+_data = {
+"RESET": SubResource("Animation_mc2gv"),
+"death": SubResource("Animation_d55uk"),
+"hurt": SubResource("Animation_q3q45"),
+"idle": SubResource("Animation_r37ii"),
+"summon": SubResource("Animation_nkv2g"),
+"walk": SubResource("Animation_6gugh")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_654rk"]
+radius = 128.062
+
+[node name="DeathBringer" instance=ExtResource("1_11rky")]
+collision_layer = 2
+script = ExtResource("2_q1p8e")
+max_health = 100.0
+speed = 20
+attack_distance = 25
+
+[node name="AnimationPlayer" parent="." index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_iwcoh")
+}
+
+[node name="Sprite2D" parent="." index="2"]
+position = Vector2(-37, -16)
+texture = ExtResource("3_oumqd")
+hframes = 8
+vframes = 8
+
+[node name="SearchTimer" type="Timer" parent="." index="3"]
+wait_time = 0.322
+autostart = true
+
+[node name="AttackDelay" type="Timer" parent="." index="4"]
+
+[node name="DetectionArea2D" type="Area2D" parent="." index="5"]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea2D" index="0"]
+shape = SubResource("CircleShape2D_654rk")
+
+[node name="Aim" type="Node2D" parent="." index="6"]
+
+[node name="StateChart" type="Node" parent="." index="7"]
+script = ExtResource("4_yajv6")
+
+[node name="ParallelState" type="Node" parent="StateChart" index="0"]
+script = ExtResource("5_xia88")
+
+[node name="MovementStates" type="Node" parent="StateChart/ParallelState" index="0"]
+script = ExtResource("6_dg2yf")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateChart/ParallelState/MovementStates" index="0"]
+script = ExtResource("7_ihux6")
+
+[node name="to Walk" type="Node" parent="StateChart/ParallelState/MovementStates/Idle" index="0"]
+script = ExtResource("8_1gwfc")
+to = NodePath("../../Walk")
+event = &"walk"
+
+[node name="to Attack" type="Node" parent="StateChart/ParallelState/MovementStates/Idle" index="1"]
+script = ExtResource("8_1gwfc")
+to = NodePath("../../Attack")
+event = &"attack"
+
+[node name="to Hurt" type="Node" parent="StateChart/ParallelState/MovementStates/Idle" index="2"]
+script = ExtResource("8_1gwfc")
+to = NodePath("../../Hurt")
+event = &"hurt"
+
+[node name="Walk" type="Node" parent="StateChart/ParallelState/MovementStates" index="1"]
+script = ExtResource("7_ihux6")
+
+[node name="to Attack" type="Node" parent="StateChart/ParallelState/MovementStates/Walk" index="0"]
+script = ExtResource("8_1gwfc")
+to = NodePath("../../Attack")
+event = &"attack"
+
+[node name="to Idle" type="Node" parent="StateChart/ParallelState/MovementStates/Walk" index="1"]
+script = ExtResource("8_1gwfc")
+to = NodePath("../../Idle")
+event = &"idle"
+
+[node name="to Hurt" type="Node" parent="StateChart/ParallelState/MovementStates/Walk" index="2"]
+script = ExtResource("8_1gwfc")
+to = NodePath("../../Hurt")
+event = &"hurt"
+
+[node name="Attack" type="Node" parent="StateChart/ParallelState/MovementStates" index="2"]
+script = ExtResource("7_ihux6")
+
+[node name="to Walk" type="Node" parent="StateChart/ParallelState/MovementStates/Attack" index="0"]
+script = ExtResource("8_1gwfc")
+to = NodePath("../../Walk")
+event = &"walk"
+
+[node name="to Idle" type="Node" parent="StateChart/ParallelState/MovementStates/Attack" index="1"]
+script = ExtResource("8_1gwfc")
+to = NodePath("../../Idle")
+event = &"idle"
+
+[node name="Hurt" type="Node" parent="StateChart/ParallelState/MovementStates" index="3"]
+script = ExtResource("7_ihux6")
+
+[node name="to Attack" type="Node" parent="StateChart/ParallelState/MovementStates/Hurt" index="0"]
+script = ExtResource("8_1gwfc")
+to = NodePath("../../Attack")
+event = &"attack"
+delay_seconds = 0.4
+
+[node name="to Idle" type="Node" parent="StateChart/ParallelState/MovementStates/Hurt" index="1"]
+script = ExtResource("8_1gwfc")
+to = NodePath("../../Idle")
+event = &"idle"
+delay_seconds = 0.4
+
+[node name="to Walk" type="Node" parent="StateChart/ParallelState/MovementStates/Hurt" index="2"]
+script = ExtResource("8_1gwfc")
+to = NodePath("../../Walk")
+event = &"walk"
+delay_seconds = 0.4
+
+[node name="LifeStates" type="Node" parent="StateChart/ParallelState" index="1"]
+script = ExtResource("6_dg2yf")
+initial_state = NodePath("Normal")
+
+[node name="Normal" type="Node" parent="StateChart/ParallelState/LifeStates" index="0"]
+script = ExtResource("7_ihux6")
+
+[node name="to Rage" type="Node" parent="StateChart/ParallelState/LifeStates/Normal" index="0"]
+script = ExtResource("8_1gwfc")
+to = NodePath("../../Rage")
+event = &"half_health"
+
+[node name="Rage" type="Node" parent="StateChart/ParallelState/LifeStates" index="1"]
+script = ExtResource("7_ihux6")
+
+[node name="to LastBreath" type="Node" parent="StateChart/ParallelState/LifeStates/Rage" index="0"]
+script = ExtResource("8_1gwfc")
+to = NodePath("../../LastBreath")
+event = &"last_breath"
+
+[node name="LastBreath" type="Node" parent="StateChart/ParallelState/LifeStates" index="2"]
+script = ExtResource("7_ihux6")
+
+[node name="to Death" type="Node" parent="StateChart/ParallelState/LifeStates/LastBreath" index="0"]
+script = ExtResource("8_1gwfc")
+to = NodePath("../../Death")
+event = &"death"
+
+[node name="Death" type="Node" parent="StateChart/ParallelState/LifeStates" index="3"]
+script = ExtResource("7_ihux6")
+
+[connection signal="timeout" from="SearchTimer" to="." method="_on_search_timer_timeout"]
+[connection signal="body_entered" from="DetectionArea2D" to="." method="_on_detection_area_2d_body_entered"]
+[connection signal="state_entered" from="StateChart/ParallelState/MovementStates/Idle" to="." method="_on_idle_state_entered"]
+[connection signal="state_entered" from="StateChart/ParallelState/MovementStates/Walk" to="." method="_on_walk_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/ParallelState/MovementStates/Walk" to="." method="_on_walk_state_physics_processing"]

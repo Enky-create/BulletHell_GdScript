@@ -4,7 +4,7 @@ class_name Player
 @export var _friction:float
 
 func move_with_direction(direction: Vector2):
-	print(direction)
+	
 	if direction:
 		velocity=direction * _speed
 	else:
